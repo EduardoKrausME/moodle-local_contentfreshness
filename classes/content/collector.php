@@ -180,7 +180,7 @@ class collector {
      * @param string $content Content.
      */
     private function append_module_item(
-        array    &$items,
+        array &$items,
         stdClass $course,
         object $cm,
         stdClass $instance,
