@@ -21,6 +21,7 @@ use advanced_testcase;
 /**
  * Tests source/hash cache behaviour.
  *
+ * @covers \\local_contentfreshness\\cache_manager
  * @package local_contentfreshness
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
