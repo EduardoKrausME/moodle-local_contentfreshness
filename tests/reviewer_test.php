@@ -34,7 +34,14 @@ final class reviewer_test extends advanced_testcase {
      */
     public function test_valid_ai_json_is_parsed(): void {
         $reviewer = new reviewer();
-        $result = $reviewer->parse_response_text('{"items":[{"candidate_id":"abc123","classification":"likely_time_sensitive","reason":"Mentions today.","evidence":"today"}]}');
+        $result = $reviewer->parse_response_text(json_encode([
+            'items' => [[
+                'candidate_id' => 'abc123',
+                'classification' => 'likely_time_sensitive',
+                'reason' => 'Mentions today.',
+                'evidence' => 'today',
+            ]],
+        ], JSON_THROW_ON_ERROR));
 
         $this->assertCount(1, $result);
         $this->assertSame('abc123', $result[0]['candidateid']);
@@ -46,7 +53,14 @@ final class reviewer_test extends advanced_testcase {
      */
     public function test_unknown_classification_is_downgraded(): void {
         $reviewer = new reviewer();
-        $result = $reviewer->parse_response_text('{"items":[{"candidate_id":"abc","classification":"definitely_false","reason":"x","evidence":"y"}]}');
+        $result = $reviewer->parse_response_text(json_encode([
+            'items' => [[
+                'candidate_id' => 'abc',
+                'classification' => 'definitely_false',
+                'reason' => 'x',
+                'evidence' => 'y',
+            ]],
+        ], JSON_THROW_ON_ERROR));
 
         $this->assertSame('needs_human_review', $result[0]['classification']);
     }
