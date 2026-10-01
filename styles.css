@@ -1,0 +1,10 @@
+.local-contentfreshness-report .local-contentfreshness-snippet {
+    min-width: 18rem;
+    max-width: 30rem;
+    white-space: normal;
+}
+
+.local-contentfreshness-report td,
+.local-contentfreshness-report th {
+    vertical-align: top;
+}
