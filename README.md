@@ -1,27 +1,12 @@
 # Moodle Content Freshness (`local_contentfreshness`)
 
-`local_contentfreshness` is a Moodle 4.5+ local plugin that helps teachers find course content that deserves review
+`local_contentfreshness` is a Moodle local plugin that helps teachers find course content that deserves review
 because it may be time-sensitive. It deliberately does **not** declare material false or outdated and it never edits
 course content automatically.
 
-## Requirements
-
-- Moodle 4.5 or later.
-- PHP supported by the target Moodle branch.
-- `local_ai_bridge >= 2026093001`: <https://github.com/EduardoKrausME/moodle-local_ai_bridge/>
-- A bridge purpose with idnumber `contentfreshness-review` configured for the tenant/user that runs the audit.
-
-All AI calls go exclusively through:
-
-```php
-\local_ai_bridge\api::generate('contentfreshness-review', $messages);
-```
-
-The plugin contains no provider API keys, provider endpoints or model configuration.
-
 ## What is inspected
 
-The first version inspects teacher-authored text from:
+the plugin inspects teacher-authored text from:
 
 - Page;
 - Book descriptions and Book chapters;
@@ -106,26 +91,3 @@ Filters are available for section, content age, source type and severity.
 
 The plugin does not store user-specific data. Its cache contains only analysis related to teacher-authored course
 content. Student submissions and private learner content are out of scope.
-
-## Tests
-
-PHPUnit covers:
-
-- date detection;
-- software version detection;
-- temporal expressions;
-- safe URL validation;
-- hash cache invalidation;
-- capability defaults;
-- strict AI JSON parsing.
-
-## CI
-
-The included GitHub Actions workflow tests MariaDB and PostgreSQL, installs `local_ai_bridge` as an extra plugin, runs
-Moodle Plugin CI checks, the EduardoKrausME Moodle plugin validator and PHPUnit.
-
-## License
-
-GNU GPL v3 or later.
-
-Copyright 2026 Eduardo Kraus.
