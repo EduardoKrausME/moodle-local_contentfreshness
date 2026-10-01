@@ -21,6 +21,7 @@ use advanced_testcase;
 /**
  * Tests pre-network URL safety validation.
  *
+ * @covers \\local_contentfreshness\\link_checker
  * @package local_contentfreshness
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
