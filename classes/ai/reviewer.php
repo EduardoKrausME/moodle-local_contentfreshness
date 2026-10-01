@@ -71,7 +71,8 @@ class reviewer {
 
         $instruction = <<<'TEXT'
 Review ONLY the supplied snippets for content-freshness risk.
-You do not have web browsing and you must not claim that a factual statement is false, obsolete, superseded,\nor current unless that conclusion is supported by the snippet itself.
+You do not have web browsing and you must not claim that a factual statement is false, obsolete,
+superseded, or current unless that conclusion is supported by the snippet itself.
 Treat every result as decision support for a teacher, never as an automatic verdict.
 
 Allowed classifications:
@@ -80,11 +81,18 @@ Allowed classifications:
 - evergreen
 - needs_human_review
 
-Use possibly_outdated only when the snippet itself gives a concrete reason for that possibility,\nsuch as an explicitly old version/date tied to a current instruction. If external confirmation would be needed,\nuse needs_human_review or likely_time_sensitive instead.
+Use possibly_outdated only when the snippet itself gives a concrete reason for that possibility,
+such as an explicitly old version/date tied to a current instruction. If external confirmation would be needed,
+use needs_human_review or likely_time_sensitive instead.
 
 Return JSON only, with this exact top-level shape:
-{"items":[{"candidate_id":"...","classification":"...","reason":"...","evidence":"..."}]}
-Do not add markdown fences. Keep reason and evidence concise and write them in the same language as the snippet\nwhen practical. Preserve candidate_id exactly.
+{
+  "items": [
+    {"candidate_id":"...","classification":"...","reason":"...","evidence":"..."}
+  ]
+}
+Do not add markdown fences. Keep reason and evidence concise and write them in the same language
+as the snippet when practical. Preserve candidate_id exactly.
 TEXT;
 
         $messages = [
