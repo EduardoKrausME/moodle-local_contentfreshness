@@ -29,10 +29,14 @@ use moodle_exception;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class reviewer {
-    /** Purpose id required by this plugin. */
+    /**
+     * Purpose id required by this plugin.
+     */
     private const PURPOSE = 'contentfreshness-review';
 
-    /** Allowed semantic classifications. */
+    /**
+     * Allowed semantic classifications.
+     */
     private const CLASSIFICATIONS = [
         'likely_time_sensitive',
         'possibly_outdated',

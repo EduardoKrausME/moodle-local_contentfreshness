@@ -31,8 +31,8 @@
  */
 function local_contentfreshness_extend_navigation_course(
     navigation_node $navigation,
-    stdClass        $course,
-    context_course  $context
+    stdClass $course,
+    context_course $context
 ): void {
     if (!has_capability('local/contentfreshness:audit', $context)) {
         return;

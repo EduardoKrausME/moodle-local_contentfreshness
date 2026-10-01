@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/contentfreshness/db" VERSION="2026093000" COMMENT="XMLDB file for local_contentfreshness"
+<XMLDB PATH="local/contentfreshness/db" VERSION="20260930" COMMENT="XMLDB file for local_contentfreshness"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
-        <TABLE NAME="local_contentfresh_cache"
+        <TABLE NAME="local_contentfreshness_cache"
                COMMENT="Cached semantic and link review results keyed by course content hash">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>

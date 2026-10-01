@@ -29,7 +29,9 @@ use core_text;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_analyser {
-    /** Maximum snippet length sent to the AI bridge. */
+    /**
+     * Maximum snippet length sent to the AI bridge.
+     */
     private const SNIPPET_LENGTH = 600;
 
     /**
@@ -213,7 +215,7 @@ class local_analyser {
     private function candidate(
         string $type,
         string $match,
-        int    $offset,
+        int $offset,
         string $text,
         string $severity,
         string $reason

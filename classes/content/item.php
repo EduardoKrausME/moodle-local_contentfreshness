@@ -42,16 +42,16 @@ class item {
      * @param moodle_url $editurl Edit URL.
      */
     public function __construct(
-        public readonly int        $courseid,
-        public readonly string     $sourcekey,
-        public readonly string     $type,
-        public readonly int        $sourceid,
-        public readonly int        $cmid,
-        public readonly int        $sectionid,
-        public readonly int        $sectionnum,
-        public readonly string     $name,
-        public readonly string     $content,
-        public readonly int        $timemodified,
+        public readonly int $courseid,
+        public readonly string $sourcekey,
+        public readonly string $type,
+        public readonly int $sourceid,
+        public readonly int $cmid,
+        public readonly int $sectionid,
+        public readonly int $sectionnum,
+        public readonly string $name,
+        public readonly string $content,
+        public readonly int $timemodified,
         public readonly moodle_url $editurl,
     ) {
     }

@@ -182,10 +182,10 @@ class collector {
     private function append_module_item(
         array    &$items,
         stdClass $course,
-        object   $cm,
+        object $cm,
         stdClass $instance,
-        string   $type,
-        string   $content
+        string $type,
+        string $content
     ): void {
         if (trim(strip_tags($content)) === '' && trim($content) === '') {
             return;

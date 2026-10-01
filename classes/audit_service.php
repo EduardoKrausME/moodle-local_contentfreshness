@@ -31,7 +31,7 @@ use Throwable;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class audit_service {
-    /** AI batch size to keep payloads bounded. */
+    /** @var int */
     private const AI_BATCH_SIZE = 20;
 
     /** @var collector */
@@ -383,13 +383,13 @@ class audit_service {
      * @return array
      */
     private function base_row(
-        item   $item,
+        item $item,
         string $snippet,
         string $reason,
         string $risktype,
         string $severity,
         string $classification,
-        bool   $cached
+        bool $cached
     ): array {
         return [
             'sourcekey' => $item->sourcekey,

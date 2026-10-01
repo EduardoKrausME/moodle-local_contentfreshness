@@ -37,7 +37,7 @@ class cache_manager {
     public function get(int $courseid, string $sourcekey, string $contenthash): ?stdClass {
         global $DB;
 
-        $record = $DB->get_record('local_contentfresh_cache', [
+        $record = $DB->get_record('local_contentfreshness_cache', [
             'courseid' => $courseid,
             'sourcekey' => $sourcekey,
         ]);
@@ -103,10 +103,10 @@ class cache_manager {
         global $DB;
 
         $valid = array_fill_keys($sourcekeys, true);
-        $records = $DB->get_records('local_contentfresh_cache', ['courseid' => $courseid], '', 'id,sourcekey');
+        $records = $DB->get_records('local_contentfreshness_cache', ['courseid' => $courseid], '', 'id,sourcekey');
         foreach ($records as $record) {
             if (!isset($valid[$record->sourcekey])) {
-                $DB->delete_records('local_contentfresh_cache', ['id' => $record->id]);
+                $DB->delete_records('local_contentfreshness_cache', ['id' => $record->id]);
             }
         }
     }
@@ -123,7 +123,7 @@ class cache_manager {
     private function prepare_record(int $courseid, string $sourcekey, string $contenthash): stdClass {
         global $DB;
 
-        $record = $DB->get_record('local_contentfresh_cache', [
+        $record = $DB->get_record('local_contentfreshness_cache', [
             'courseid' => $courseid,
             'sourcekey' => $sourcekey,
         ]);
@@ -167,9 +167,9 @@ class cache_manager {
 
         $record->timemodified = time();
         if (!empty($record->id)) {
-            $DB->update_record('local_contentfresh_cache', $record);
+            $DB->update_record('local_contentfreshness_cache', $record);
         } else {
-            $record->id = $DB->insert_record('local_contentfresh_cache', $record);
+            $record->id = $DB->insert_record('local_contentfreshness_cache', $record);
         }
     }
 }
