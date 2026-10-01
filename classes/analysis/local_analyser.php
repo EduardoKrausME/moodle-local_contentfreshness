@@ -155,8 +155,8 @@ class local_analyser {
      * @param array $out Findings.
      */
     private function find_temporal_expressions(string $text, array &$out): void {
-        $pattern = '/\\b(?:atualmente|hoje|agora|no momento|neste momento|recentemente|última versão|' +
-            'ultima versão|nova versão|versão atual|currently|today|now|recently|latest version|new version|' +
+        $pattern = '/\\b(?:atualmente|hoje|agora|no momento|neste momento|recentemente|última versão|' .
+            'ultima versão|nova versão|versão atual|currently|today|now|recently|latest version|new version|' .
             'current version)\\b/iu';
         if (!preg_match_all($pattern, $text, $matches, PREG_OFFSET_CAPTURE)) {
             return;
@@ -188,7 +188,7 @@ class local_analyser {
 
         foreach ($matches[0] as [$match, $offset]) {
             $context = $this->snippet($text, $offset, strlen($match), 180);
-            $softwarepattern = '/\\b(?:versão|version|software|moodle|php|python|java|node(?:\\.js)?|' +
+            $softwarepattern = '/\\b(?:versão|version|software|moodle|php|python|java|node(?:\\.js)?|' .
                 'react|angular|laravel|windows|ubuntu|android|ios|chrome|firefox|postgresql|mysql|mariadb|api)\\b/iu';
             if (!preg_match($softwarepattern, $context)) {
                 continue;
