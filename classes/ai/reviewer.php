@@ -125,7 +125,7 @@ TEXT;
      */
     public function parse_response_text(string $text): array {
         $text = trim($text);
-        if (preg_match('/```(?:json)?\s*(.*?)```/is', $text, $match)) {
+        if (preg_match('/\x60{3}(?:json)?\s*(.*?)\x60{3}/is', $text, $match)) {
             $text = trim($match[1]);
         }
 
