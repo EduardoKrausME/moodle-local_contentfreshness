@@ -26,6 +26,29 @@ use moodle_url;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class item {
+    /** @var int Course id. */
+    public readonly int $courseid;
+    /** @var string Stable source key. */
+    public readonly string $sourcekey;
+    /** @var string Logical content type. */
+    public readonly string $type;
+    /** @var int Source record id. */
+    public readonly int $sourceid;
+    /** @var int Course-module id, zero for sections. */
+    public readonly int $cmid;
+    /** @var int Course section id. */
+    public readonly int $sectionid;
+    /** @var int Section number. */
+    public readonly int $sectionnum;
+    /** @var string Human-readable item name. */
+    public readonly string $name;
+    /** @var string HTML/text content to inspect. */
+    public readonly string $content;
+    /** @var int Moodle modification time. */
+    public readonly int $timemodified;
+    /** @var moodle_url Edit URL. */
+    public readonly moodle_url $editurl;
+
     /**
      * Constructor.
      *
@@ -42,18 +65,29 @@ class item {
      * @param moodle_url $editurl Edit URL.
      */
     public function __construct(
-        public readonly int $courseid,
-        public readonly string $sourcekey,
-        public readonly string $type,
-        public readonly int $sourceid,
-        public readonly int $cmid,
-        public readonly int $sectionid,
-        public readonly int $sectionnum,
-        public readonly string $name,
-        public readonly string $content,
-        public readonly int $timemodified,
-        public readonly moodle_url $editurl,
+        int $courseid,
+        string $sourcekey,
+        string $type,
+        int $sourceid,
+        int $cmid,
+        int $sectionid,
+        int $sectionnum,
+        string $name,
+        string $content,
+        int $timemodified,
+        moodle_url $editurl
     ) {
+        $this->courseid = $courseid;
+        $this->sourcekey = $sourcekey;
+        $this->type = $type;
+        $this->sourceid = $sourceid;
+        $this->cmid = $cmid;
+        $this->sectionid = $sectionid;
+        $this->sectionnum = $sectionnum;
+        $this->name = $name;
+        $this->content = $content;
+        $this->timemodified = $timemodified;
+        $this->editurl = $editurl;
     }
 
     /**
