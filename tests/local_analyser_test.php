@@ -22,6 +22,7 @@ use local_contentfreshness\analysis\local_analyser;
 /**
  * Tests deterministic freshness signals.
  *
+ * @covers \\local_contentfreshness\\analysis\\local_analyser
  * @package local_contentfreshness
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
