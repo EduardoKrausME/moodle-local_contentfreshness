@@ -23,6 +23,7 @@ use moodle_exception;
 /**
  * Tests strict AI output parsing without calling a provider.
  *
+ * @covers \\local_contentfreshness\\ai\\reviewer
  * @package local_contentfreshness
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
