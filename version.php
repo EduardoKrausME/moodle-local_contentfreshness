@@ -25,10 +25,10 @@
 defined('MOODLE_INTERNAL') || die;
 
 $plugin->component = 'local_contentfreshness';
-$plugin->version = 2026093000;
+$plugin->version = 2026100300;
 $plugin->requires = 2024100700;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+$plugin->release = '1.0.1';
 $plugin->dependencies = [
     'local_ai_bridge' => 2026093001,
 ];
