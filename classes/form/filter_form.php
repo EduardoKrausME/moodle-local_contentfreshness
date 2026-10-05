@@ -16,6 +16,10 @@
 
 namespace local_contentfreshness\form;
 
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->libdir . '/formslib.php');
+
 use moodle_url;
 use moodleform;
 
