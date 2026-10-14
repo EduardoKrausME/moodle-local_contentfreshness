@@ -4,6 +4,24 @@
 because it may be time-sensitive. It deliberately does **not** declare material false or outdated and it never edits
 course content automatically.
 
+## Installing from a ZIP
+
+Moodle requires the plugin archive to contain a single top-level directory named `contentfreshness/`,
+with `contentfreshness/version.php` inside it. GitHub's automatic **Source code (zip)** archives
+(and **Code > Download ZIP**) use a repository-derived directory name and are **not** suitable for
+direct upload through **Site administration > Plugins > Install plugins**.
+
+The [packaging workflow](https://github.com/EduardoKrausME/moodle-local_contentfreshness/actions/workflows/release.yml)
+builds and checks a Moodle-installable `local_contentfreshness.zip` on every push. To use this
+build, open a successful workflow run, download the `contentfreshness-installable` Actions
+artifact, extract its outer artifact ZIP and upload the contained `local_contentfreshness.zip`
+to Moodle. The outer Actions artifact ZIP is **not** the Moodle plugin ZIP.
+
+For future tagged releases, download the attached `local_contentfreshness_<version>.zip` from
+[Releases](https://github.com/EduardoKrausME/moodle-local_contentfreshness/releases) rather
+than GitHub's automatically generated source archives. Release assets are produced by the same
+packaging and archive checks. Historical releases without this asset are not retroactively changed.
+
 ## What is inspected
 
 the plugin inspects teacher-authored text from:
