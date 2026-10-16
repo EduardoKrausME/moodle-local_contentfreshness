@@ -68,9 +68,10 @@ class audit_service {
      *
      * @param stdClass $course Course record.
      * @param bool $refresh Whether to refresh changed semantic candidates and links.
+     * @param bool $storelocal Whether to persist deterministic results (false for MCP READ).
      * @return array{rows:array,errors:array,warnings:array,itemcount:int}
      */
-    public function audit(stdClass $course, bool $refresh): array {
+    public function audit(stdClass $course, bool $refresh, bool $storelocal = true): array {
         $items = $this->collector->collect($course);
         $errors = [];
         $warnings = [];
@@ -95,8 +96,10 @@ class audit_service {
                 $local = $this->decode_local_result($cached->localresultjson);
             } else {
                 $local = $this->analyser->analyse($contentitem->content);
-                $this->cache->store_local($contentitem->courseid, $contentitem->sourcekey, $hash, $local);
-                $cached = $this->cache->get($contentitem->courseid, $contentitem->sourcekey, $hash);
+                if ($storelocal) {
+                    $this->cache->store_local($contentitem->courseid, $contentitem->sourcekey, $hash, $local);
+                    $cached = $this->cache->get($contentitem->courseid, $contentitem->sourcekey, $hash);
+                }
             }
 
             $local['urls'] = array_values(array_filter(

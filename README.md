@@ -109,3 +109,35 @@ Filters are available for section, content age, source type and severity.
 
 The plugin does not store user-specific data. Its cache contains only analysis related to teacher-authored course
 content. Student submissions and private learner content are out of scope.
+
+## Optional MCP integration (ChatGPT)
+
+When [local_mcp](https://github.com/EduardoKrausME/moodle-local_mcp) is installed,
+it automatically discovers `local_contentfreshness\mcp\provider` in
+`classes/mcp/provider.php`. No `lib.php` callback, hard dependency, separate server
+or manual tool registration is required; without `local_mcp` this plugin works normally.
+
+| Tool | Scope | Purpose |
+| --- | --- | --- |
+| `contentfreshness_list_sources` | READ | List the teacher-authored content sources in a course, with current-hash cache status and pagination. |
+| `contentfreshness_get_report` | READ | Inspect deterministic findings and still-valid cached AI/link results with pagination and optional source, section and severity filters. |
+| `contentfreshness_run_audit` | WRITE | Perform a confirmed refresh using the existing `audit_service`, including configured AI review, safe HEAD checks and cache updates. |
+
+Both READ tools require the existing `local/contentfreshness:audit` Moodle capability
+in the course context and the MCP READ scope. They never send HTTP requests, consume AI
+credits, write cache rows or modify course content. To enforce this, `audit_service::audit()`
+accepts an optional third argument `$storelocal`; `get_report` passes `false` while the
+existing Moodle interface retains its original cache-writing behavior.
+
+The WRITE tool also requires `local/contentfreshness:audit` and an enabled MCP WRITE
+scope. It presents a side-effect-free preview before the MCP confirmation token is
+issued. A confirmed refresh may check external links, send bounded snippets through
+`local_ai_bridge` and save cache results; it never changes course activities.
+Settings `maxurlchecks`, `linktimeout` and `maxaicandidates` remain authoritative.
+
+Filtering options: `sourcekey`, `sectionnum` (Moodle course section number), and
+`severity` (`low`, `medium`, `high`). Each response includes counts and no more
+than 50 detail rows; use `offset` and `limit` to retrieve additional pages.
+Items are observations requiring human review, **not** authoritative claims
+that the content is outdated. Update the Moodle plugin and refresh the MCP
+connector to discover the tools.
