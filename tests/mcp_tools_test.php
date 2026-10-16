@@ -180,4 +180,54 @@ final class mcp_tools_test extends advanced_testcase {
         $this->expectException(required_capability_exception::class);
         (new get_report())->execute(["courseid" => $course->id], $identity);
     }
+    /**
+     * Reject oversized source identifiers instead of broadening the result.
+     *
+     * @return void
+     */
+    public function test_report_builder_rejects_oversized_source_key(): void {
+        $this->expectException(\invalid_parameter_exception::class);
+        (new report_builder())->build(
+            ["rows" => [], "errors" => [], "warnings" => [], "itemcount" => 0],
+            ["sourcekey" => str_repeat("x", 256)]
+        );
+    }
+
+    /**
+     * Reject sections below the explicit no-filter sentinel.
+     *
+     * @return void
+     */
+    public function test_report_builder_rejects_invalid_section(): void {
+        $this->expectException(\invalid_parameter_exception::class);
+        (new report_builder())->build(
+            ["rows" => [], "errors" => [], "warnings" => [], "itemcount" => 0],
+            ["sectionnum" => -2]
+        );
+    }
+
+    /**
+     * Apply section and severity filters together without returning unrelated findings.
+     *
+     * @return void
+     */
+    public function test_report_builder_applies_multiple_filters(): void {
+        $rows = [
+            ["sourcekey" => "page:1:content", "sectionnum" => 1, "severity" => "high"],
+            ["sourcekey" => "page:1:content", "sectionnum" => 2, "severity" => "high"],
+            ["sourcekey" => "page:1:content", "sectionnum" => 1, "severity" => "low"],
+            ["sourcekey" => "page:2:content", "sectionnum" => 1, "severity" => "high"],
+        ];
+        $result = (new report_builder())->build(
+            ["rows" => $rows, "errors" => [], "warnings" => [], "itemcount" => 2],
+            ["sourcekey" => "page:1:content", "sectionnum" => 1, "severity" => "high"]
+        );
+        $this->assertSame(1, $result["total_findings"]);
+        $this->assertCount(1, $result["findings"]);
+        $this->assertSame("page:1:content", $result["findings"][0]["sourcekey"]);
+        $this->assertSame(1, $result["severity_counts"]["high"]);
+        $this->assertSame(0, $result["severity_counts"]["low"]);
+    }
+
+
 }

@@ -36,6 +36,8 @@ use local_mcp\security\authenticated_identity;
  */
 final class list_sources extends base_tool {
     /**
+     * Return the unique MCP tool name.
+     *
      * @return string
      */
     public function get_name(): string {
@@ -43,6 +45,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Return the translated MCP tool title.
+     *
      * @return string
      */
     public function get_title(): string {
@@ -50,6 +54,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Return the translated MCP tool description.
+     *
      * @return string
      */
     public function get_description(): string {
@@ -57,6 +63,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Return the Moodle capability required by the tool.
+     *
      * @return string
      */
     public function get_required_capability(): string {
@@ -64,6 +72,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Describe the accepted MCP input properties.
+     *
      * @return array
      */
     public function get_input_schema(): array {
@@ -75,6 +85,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Resolve the requested Moodle course context.
+     *
      * @param array $arguments MCP input.
      * @return context
      */
@@ -84,6 +96,8 @@ final class list_sources extends base_tool {
     }
 
     /**
+     * Execute the authorized MCP operation.
+     *
      * @param array $arguments MCP input.
      * @param authenticated_identity $identity Authenticated Moodle user.
      * @return array

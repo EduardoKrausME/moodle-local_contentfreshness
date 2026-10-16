@@ -35,6 +35,8 @@ use local_mcp\write\tool\base_tool;
  */
 final class run_audit extends base_tool {
     /**
+     * Return the unique MCP tool name.
+     *
      * @return string
      */
     public function get_name(): string {
@@ -42,6 +44,8 @@ final class run_audit extends base_tool {
     }
 
     /**
+     * Return the translated MCP tool title.
+     *
      * @return string
      */
     public function get_title(): string {
@@ -49,6 +53,8 @@ final class run_audit extends base_tool {
     }
 
     /**
+     * Return the translated MCP tool description.
+     *
      * @return string
      */
     public function get_description(): string {
@@ -56,6 +62,8 @@ final class run_audit extends base_tool {
     }
 
     /**
+     * Return the Moodle capability required by the tool.
+     *
      * @return string
      */
     public function get_required_capability(): string {
@@ -63,6 +71,8 @@ final class run_audit extends base_tool {
     }
 
     /**
+     * Describe the accepted MCP input properties.
+     *
      * @return array
      */
     public function get_input_schema(): array {
@@ -74,6 +84,8 @@ final class run_audit extends base_tool {
     }
 
     /**
+     * Resolve the requested Moodle course context.
+     *
      * @param array $arguments MCP input.
      * @return context
      */
@@ -119,8 +131,9 @@ final class run_audit extends base_tool {
      * @return array
      */
     public function execute(array $arguments, authenticated_identity $identity): array {
+        // Validate course permissions and all filters before any network or AI work.
+        $this->preview($arguments, $identity);
         $courseid = (int)$arguments["courseid"];
-        access::require_course($courseid, $identity);
         $result = (new audit_service())->audit(access::course($courseid), true);
         return [
             "courseid" => $courseid,
