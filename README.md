@@ -112,7 +112,7 @@ content. Student submissions and private learner content are out of scope.
 
 ## Optional MCP integration (ChatGPT)
 
-When [local_mcp](https://github.com/EduardoKrausME/moodle-local_mcp) is installed,
+When [local_mcp](https://eduardokrausme.github.io/moodle-local_mcp/) is installed,
 it automatically discovers `local_contentfreshness\mcp\provider` in
 `classes/mcp/provider.php`. No `lib.php` callback, hard dependency, separate server
 or manual tool registration is required; without `local_mcp` this plugin works normally.
