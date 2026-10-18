@@ -44,6 +44,8 @@ require_capability('local/contentfreshness:audit', $context);
 $PAGE->set_context($context);
 $PAGE->set_course($course);
 $PAGE->set_url(new moodle_url('/local/contentfreshness/index.php', ['id' => $courseid]));
+
+\local_contentfreshness\mcp_banner::dismiss_if_requested($PAGE->url);
 $PAGE->set_title(get_string('pluginname', 'local_contentfreshness'));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -166,6 +168,10 @@ $templatecontext = [
 ];
 
 echo $OUTPUT->header();
+if (\local_contentfreshness\mcp_banner::should_show()) {
+    echo \local_contentfreshness\mcp_banner::render($OUTPUT, $PAGE->url);
+}
+
 echo $OUTPUT->heading(get_string('pluginname', 'local_contentfreshness'));
 echo $OUTPUT->render_from_template('local_contentfreshness/report', $templatecontext);
 echo $OUTPUT->footer();
