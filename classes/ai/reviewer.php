@@ -16,7 +16,6 @@
 
 namespace local_contentfreshness\ai;
 
-use core_text;
 use JsonException;
 use local_ai_bridge\api;
 use moodle_exception;
@@ -176,9 +175,9 @@ TEXT;
      */
     private function limit_text(string $text, int $maxchars): string {
         $text = trim(strip_tags($text));
-        if (core_text::strlen($text) <= $maxchars) {
+        if (strlen($text) <= $maxchars) {
             return $text;
         }
-        return core_text::substr($text, 0, $maxchars) . '…';
+        return substr($text, 0, $maxchars) . '…';
     }
 }

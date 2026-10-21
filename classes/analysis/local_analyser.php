@@ -16,7 +16,6 @@
 
 namespace local_contentfreshness\analysis;
 
-use core_text;
 
 /**
  * Deterministic freshness heuristics.
@@ -251,11 +250,11 @@ class local_analyser {
         // Convert the match position to character offsets before extracting the snippet.
         $prefix = substr($text, 0, $offset);
         $matchbytes = substr($text, $offset, $matchlength);
-        $charoffset = core_text::strlen($prefix === false ? '' : $prefix);
-        $matchchars = core_text::strlen($matchbytes === false ? '' : $matchbytes);
+        $charoffset = strlen($prefix === false ? '' : $prefix);
+        $matchchars = strlen($matchbytes === false ? '' : $matchbytes);
         $half = (int)floor(($maxlength - $matchchars) / 2);
         $start = max(0, $charoffset - max(0, $half));
-        return trim(core_text::substr($text, $start, $maxlength));
+        return trim(substr($text, $start, $maxlength));
     }
 
     /**
